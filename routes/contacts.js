@@ -2,8 +2,13 @@ var router = require('express').Router();
 
 // path is /contacts
 
-router.get('/', function (req, res) {
-    // console.log(req);
+function middleware(req, res, next) {
+    req.name = 'Chris';
+    next();
+}
+
+router.get('/', middleware, function (req, res) {
+    // console.log(req.name);
     res.status(200).json({
         message: 'IMPL_101'
     });
