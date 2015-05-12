@@ -5,7 +5,7 @@ TODO:
 Write code to enable authorization headers with cors
 Write an ajax call from another domain which sends cookies to the cross origin server
 
-Finish Scripted HTTP, Chp 17 from JS the definitive guide
+Finish Scripted HTTP, Chp 18 from JS the definitive guide
 
 
 Skim
