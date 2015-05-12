@@ -11,17 +11,27 @@
             // and make an ajax call by sending the file object
 
             document.querySelector('input').addEventListener('change', function () {
-                var file = this.files[0];
+                var files = Array.prototype.slice.call(this.files);
 
                 var formdata = new FormData();
                 var nina = {
                     name: 'Nina'
                 }
                 formdata.append('Nina', JSON.stringify(nina));
-                formdata.append('somefile', file);
+                files.forEach(function (file, index){
+                    formdata.append('file' + index, file);
+                });
+
 
                 var xhr = new XMLHttpRequest();
                 xhr.open('post', '/uploads');
+
+                var progressbar = document.querySelector('progress');
+                xhr.upload.addEventListener('progress', function (event) {
+                    // fires the event multiple times
+                    progressbar.setAttribute('value', ~~(event.loaded / event.total * 100));
+                });
+
                 xhr.send(formdata);
             });
         });
@@ -29,8 +39,9 @@
     </script>
 </head>
 <body>
+<progress value="22" max="100"></progress>
 <form action="/uploads" method="post">
-    <input type="file"/>
+    <input type="file" multiple/>
 </form>
 </body>
 </html>

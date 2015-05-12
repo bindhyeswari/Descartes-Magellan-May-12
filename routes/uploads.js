@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    console.log(req.files);
+    console.log(JSON.parse(req.body.Nina).name);
     console.log();
     res.render('upload');
 });
