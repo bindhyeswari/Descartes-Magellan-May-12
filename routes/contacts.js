@@ -10,11 +10,17 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    res.render('contact', { user: req.body });
-    /*res.status(200).json({
-        message: 'Received request from front end ... ',
-        received: req.body
-    });*/
+
+    var accept = req.get('Accept');
+    //console.log(req.is('html'));
+    if (accept.indexOf('text/html') !== -1) {
+        res.render('contact', { user: req.body });
+    } else {
+        res.status(200).json({
+         message: 'Received request from front end ... ',
+         received: req.body
+        });
+    }
 });
 
 module.exports = router;
